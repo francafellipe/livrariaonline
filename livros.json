@@ -1,0 +1,149 @@
+[
+  {
+      "titulo": "O Morro dos Ventos Uivantes",
+      "autor": "Emily Brontë",
+      "genero": "Romance",
+      "anoPublicacao": 1847,
+      "avaliacoes": [5, 4, 5]
+  },
+  {
+      "titulo": "1984",
+      "autor": "George Orwell",
+      "genero": "Distopia",
+      "anoPublicacao": 1949,
+      "avaliacoes": [5, 5, 5]
+  },
+  {
+      "titulo": "Orgulho e Preconceito",
+      "autor": "Jane Austen",
+      "genero": "Romance",
+      "anoPublicacao": 1813,
+      "avaliacoes": [5, 5, 4, 5]
+  },
+  {
+      "titulo": "Dom Quixote",
+      "autor": "Miguel de Cervantes",
+      "genero": "Romance",
+      "anoPublicacao": 1605,
+      "avaliacoes": [4, 5, 4, 5, 5]
+  },
+  {
+      "titulo": "A Revolução dos Bichos",
+      "autor": "George Orwell",
+      "genero": "Fábula",
+      "anoPublicacao": 1945,
+      "avaliacoes": [5, 4, 4, 5]
+  },
+  {
+      "titulo": "O Senhor dos Anéis",
+      "autor": "J.R.R. Tolkien",
+      "genero": "Fantasia",
+      "anoPublicacao": 1954,
+      "avaliacoes": [5, 5, 5, 4]
+  },
+  {
+      "titulo": "O Hobbit",
+      "autor": "J.R.R. Tolkien",
+      "genero": "Fantasia",
+      "anoPublicacao": 1937,
+      "avaliacoes": [5, 5, 5, 4, 5]
+  },
+  {
+      "titulo": "O Sol é Para Todos",
+      "autor": "Harper Lee",
+      "genero": "Drama",
+      "anoPublicacao": 1960,
+      "avaliacoes": [5, 4, 5]
+  },
+  {
+      "titulo": "O Grande Gatsby",
+      "autor": "F. Scott Fitzgerald",
+      "genero": "Romance",
+      "anoPublicacao": 1925,
+      "avaliacoes": [4, 4, 5, 5]
+  },
+  {
+      "titulo": "Cem Anos de Solidão",
+      "autor": "Gabriel García Márquez",
+      "genero": "Realismo Mágico",
+      "anoPublicacao": 1967,
+      "avaliacoes": [5, 5, 4]
+  },
+  {
+      "titulo": "O Código Da Vinci",
+      "autor": "Dan Brown",
+      "genero": "Thriller",
+      "anoPublicacao": 2003,
+      "avaliacoes": [4, 4, 5, 5]
+  },
+  {
+      "titulo": "Harry Potter e a Pedra Filosofal",
+      "autor": "J.K. Rowling",
+      "genero": "Fantasia",
+      "anoPublicacao": 1997,
+      "avaliacoes": [5, 5, 5, 5]
+  },
+  {
+      "titulo": "O Alquimista",
+      "autor": "Paulo Coelho",
+      "genero": "Ficção",
+      "anoPublicacao": 1988,
+      "avaliacoes": [4, 4, 5, 3]
+  },
+  {
+      "titulo": "O Apanhador no Campo de Centeio",
+      "autor": "J.D. Salinger",
+      "genero": "Ficção",
+      "anoPublicacao": 1951,
+      "avaliacoes": [5, 4, 4]
+  },
+  {
+      "titulo": "A Menina que Roubava Livros",
+      "autor": "Markus Zusak",
+      "genero": "Drama",
+      "anoPublicacao": 2005,
+      "avaliacoes": [5, 5, 4, 4]
+  },
+  {
+      "titulo": "A Cabana",
+      "autor": "William P. Young",
+      "genero": "Ficção",
+      "anoPublicacao": 2007,
+      "avaliacoes": [4, 5, 3, 4]
+  },
+  {
+      "titulo": "O Principe",
+      "autor": "Nicolau Maquiavel",
+      "genero": "Política",
+      "anoPublicacao": 1532,
+      "avaliacoes": [5, 4, 5]
+  },
+  {
+      "titulo": "A Garota no Trem",
+      "autor": "Paula Hawkins",
+      "genero": "Thriller",
+      "anoPublicacao": 2015,
+      "avaliacoes": [4, 4, 5, 4]
+  },
+  {
+      "titulo": "O Cemitério de Livros Esquecidos",
+      "autor": "Carlos Ruiz Zafón",
+      "genero": "Mistério",
+      "anoPublicacao": 2001,
+      "avaliacoes": [5, 5, 5]
+  },
+  {
+      "titulo": "O Lobo das Estepes",
+      "autor": "Hermann Hesse",
+      "genero": "Ficção",
+      "anoPublicacao": 1927,
+      "avaliacoes": [4, 4, 5, 5]
+  },
+  {
+      "titulo": "A Estrada",
+      "autor": "Cormac McCarthy",
+      "genero": "Drama",
+      "anoPublicacao": 2006,
+      "avaliacoes": [5, 5, 4]
+  }
+]

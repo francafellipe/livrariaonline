@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livraria do Fellipe Online</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            margin: 0;
+        }
+
+        section {
+            background-color: #fff;
+            margin: 20px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+        }
+
+        form label {
+            display: block;
+            margin: 10px 0 5px;
+            font-weight: bold;
+        }
+
+        input, select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .book-card {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+        }
+
+        .book-card h3 {
+            margin: 0;
+        }
+
+        .book-card p {
+            margin: 5px 0;
+        }
+
+        .book-card button {
+            align-self: center;
+            margin-top: 10px;
+        }
+
+        @media (max-width: 600px) {
+            input, select, button {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Livraria Online</h1>
+
+    <section id="add-book">
+        <h2>Adicionar Livro</h2>
+        <form id="book-form" aria-labelledby="add-book">
+            <label for="titulo">Título:</label>
+            <input type="text" id="titulo" name="titulo" required aria-required="true">
+            <label for="autor">Autor:</label>
+            <input type="text" id="autor" name="autor" required aria-required="true">
+            <label for="genero">Gênero:</label>
+            <input type="text" id="genero" name="genero" required aria-required="true">
+            <label for="anoPublicacao">Ano de Publicação:</label>
+            <input type="number" id="anoPublicacao" name="anoPublicacao" required aria-required="true">
+            <button type="submit">Adicionar Livro</button>
+        </form>
+    </section>
+
+    <section id="search-book">
+        <h2>Buscar Livro</h2>
+        <input type="text" id="search" placeholder="Buscar por título, autor ou gênero..." aria-label="Buscar por título, autor ou gênero">
+        <button id="search-button">Buscar</button>
+        <div id="search-books" aria-live="polite"></div>
+    </section>
+
+    <section id="sort-book">
+        <h2>Classificar Livros</h2>
+        <select id="sort-criteria" aria-label="Classificar livros por">
+            <option value="titulo">Título</option>
+            <option value="autor">Autor</option>
+            <option value="avaliacao">Avaliação</option>
+        </select>
+    </section>
+
+    <section id="book-list">
+        <h2>Lista de Livros</h2>
+        <button id="exibir-livros">Exibir Livros</button>
+        <div id="books"></div>
+    </section>
+
+    <section id="file-management">
+        <h2>Carregar e Salvar Arquivo JSON</h2>
+        <input type="file" id="file-input" accept=".json" aria-label="Selecionar arquivo JSON">
+        <button id="save-file">Salvar Arquivo</button>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let livros = [];
+
+            function carregarLivros() {
+                fetch('livros.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        livros = data;
+                        exibirLivros(livros);
+                    })
+                    .catch(error => console.error('Erro ao carregar livros:', error));
+            }
+
+            carregarLivros();
+
+            document.getElementById('book-form').addEventListener('submit', event => {
+                event.preventDefault();
+
+                const titulo = document.getElementById('titulo').value;
+                const autor = document.getElementById('autor').value;
+                const genero = document.getElementById('genero').value;
+                const anoPublicacao = document.getElementById('anoPublicacao').value;
+
+                const novoLivro = {
+                    id: Date.now(),
+                    titulo,
+                    autor,
+                    genero,
+                    anoPublicacao: parseInt(anoPublicacao),
+                    avaliacoes: []
+                };
+
+                livros.push(novoLivro);
+                exibirLivros(livros);
+                document.getElementById('book-form').reset();
+            });
+
+            document.getElementById('search-button').addEventListener('click', () => {
+                const query = document.getElementById('search').value.toLowerCase();
+                const livrosFiltrados = livros.filter(livro =>
+                    livro.titulo.toLowerCase().includes(query) ||
+                    livro.autor.toLowerCase().includes(query) ||
+                    livro.genero.toLowerCase().includes(query)
+                );
+                exibirLivros(livrosFiltrados, 'search-books');
+            });
+
+            document.getElementById('sort-criteria').addEventListener('change', event => {
+                const criterio = event.target.value;
+                let livrosOrdenados = [...livros];
+
+                if (criterio === 'titulo') {
+                    livrosOrdenados.sort((a, b) => a.titulo.localeCompare(b.titulo));
+                } else if (criterio === 'autor') {
+                    livrosOrdenados.sort((a, b) => a.autor.localeCompare(b.autor));
+                } else if (criterio === 'avaliacao') {
+                    livrosOrdenados.sort((a, b) => {
+                        const mediaA = a.avaliacoes.length > 0 ? a.avaliacoes.reduce((a, b) => a + b, 0) / a.avaliacoes.length : 0;
+                        const mediaB = b.avaliacoes.length > 0 ? b.avaliacoes.reduce((a, b) => a + b, 0) / b.avaliacoes.length : 0;
+                        return mediaB - mediaA;
+                    });
+                }
+
+                exibirLivros(livrosOrdenados);
+            });
+
+            document.getElementById('exibir-livros').addEventListener('click', () => {
+                exibirLivros(livros);
+            });
+
+            document.getElementById('save-file').addEventListener('click', () => {
+                const blob = new Blob([JSON.stringify(livros, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'livros.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+
+            window.avaliarLivro = function (id) {
+                const avaliacao = parseInt(prompt('Digite uma avaliação de 1 a 5:'));
+                if (avaliacao >= 1 && avaliacao <= 5) {
+                    const livro = livros.find(l => l.id === id);
+                    livro.avaliacoes.push(avaliacao);
+                    exibirLivros(livros);
+                } else {
+                    alert('Avaliação inválida!');
+                }
+            };
+
+            function exibirLivros(livros, targetId = 'books') {
+                const container = document.getElementById(targetId);
+                container.innerHTML = '';
+                livros.forEach(livro => {
+                    const mediaAvaliacao = livro.avaliacoes.length > 0 ? (livro.avaliacoes.reduce((a, b) => a + b, 0) / livro.avaliacoes.length).toFixed(2) : 'N/A';
+                    const div = document.createElement('div');
+                    div.className = 'book-card';
+                    div.innerHTML = `
+                        <h3>${livro.titulo}</h3>
+                        <p><strong>Autor:</strong> ${livro.autor}</p>
+                        <p><strong>Gênero:</strong> ${livro.genero}</p>
+                        <p><strong>Ano de Publicação:</strong> ${livro.anoPublicacao}</p>
+                        <p><strong>Avaliação Média:</strong> ${mediaAvaliacao}</p
+                            <button onclick="avaliarLivro(${livro.id})">Avaliar Livro</button>
+                    `;
+                    container.appendChild(div);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
